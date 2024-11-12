@@ -84,7 +84,7 @@ void _upyr_log_generic(
     _upyr_log_printf("%s%s%s", buffer, postfix, _UPYR_LOG_COLOR_DEFAULT);
 }
 
-void _upyr_loghex_generic(
+void _upyr_log_hex_generic(
     upyr_log_tag_t   tag,
     upyr_log_level_e level,
     const char      *file,
