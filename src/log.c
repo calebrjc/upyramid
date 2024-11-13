@@ -95,7 +95,7 @@ void _upyr_log_hex_generic(
     size_t           size,
     const char      *user_prefix)
 {
-    UPYR_RETURN_IF_FALSE(tag && data && size);
+    UPYR_RETURN_IF_FALSE(data && size);
     UPYR_RETURN_IF_TRUE(level < s_level);
 
     const char *tag_str = "UNKNOWN";
@@ -119,13 +119,13 @@ void _upyr_log_hex_generic(
             _upyr_log_printf("%s - ", user_prefix);
         }
 
-        _upyr_log_printf("%04zx: ", line_start_byte_idx);
+        _upyr_log_printf("%04zX: ", line_start_byte_idx);
 
         for (size_t i = 0; i < 16; ++i)
         {
             if (line_start_byte_idx + i < size)
             {
-                _upyr_log_printf("%02x ", ((unsigned char *)data)[line_start_byte_idx + i]);
+                _upyr_log_printf("%02X ", ((unsigned char *)data)[line_start_byte_idx + i]);
             }
             else
             {
