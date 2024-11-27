@@ -25,7 +25,7 @@ typedef void (*upyr_cli_putc_f)(void *param, char c, bool flush);
 /// @param cli The CLI for which this command is being handled.
 /// @param argc The number of arguments passed to the handler (includes the command name).
 /// @param argv The arguments passed to the handler.
-typedef int (*upyr_cli_handler_f)(upyr_cli_t *cli, int argc, char **argv);
+typedef int (*upyr_cli_handler_f)(const upyr_cli_t *cli, int argc, char **argv);
 
 /// @brief The result of a CLI command dispatch operation.
 typedef enum
@@ -113,7 +113,7 @@ bool upyr_cli_process_char(upyr_cli_t *cli, char c);
 /// processed.
 /// @param cli The CLI to get the command buffer from.
 /// @return The null-terminated command buffer, or NULL if the buffer is not ready to be processed.
-const char *upyr_cli_getline(upyr_cli_t *cli);
+const char *upyr_cli_getline(const upyr_cli_t *cli);
 
 /// @brief Parse the command buffer into an argc/argv pair.
 /// @param cli The CLI to process the command buffer of.

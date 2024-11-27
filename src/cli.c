@@ -28,12 +28,12 @@ static bool _upyr_cli_is_whitespace(char c);
 static void _upyr_cli_reset(upyr_cli_t *cli);
 static void _upyr_cli_handle_char_default(upyr_cli_t *cli, char c);
 
-static void _upyr_cli_term_ansi(upyr_cli_t *cli, size_t n, char code);
-static void _upyr_cli_term_cursor_back(upyr_cli_t *cli, size_t n);
-static void _upyr_cli_term_cursor_fwd(upyr_cli_t *cli, size_t n);
+static void _upyr_cli_term_ansi(const upyr_cli_t *cli, size_t n, char code);
+static void _upyr_cli_term_cursor_back(const upyr_cli_t *cli, size_t n);
+static void _upyr_cli_term_cursor_fwd(const upyr_cli_t *cli, size_t n);
 
 #if UPYR_CLI_HISTORY_ENABLED
-static void _upyr_cli_term_backspace(upyr_cli_t *cli, size_t n);
+static void _upyr_cli_term_backspace(const upyr_cli_t *cli, size_t n);
 #endif
 
 #if UPYR_CLI_HISTORY_ENABLED
@@ -384,7 +384,7 @@ bool upyr_cli_process_char(upyr_cli_t *cli, char c)
     return cli->flags & UPYR_CLI_FLAGS_CMD_READY;
 }
 
-const char *upyr_cli_getline(upyr_cli_t *cli)
+const char *upyr_cli_getline(const upyr_cli_t *cli)
 {
     UPYR_ERROR_IF_FALSE(cli, NULL, "No CLI provided");
     UPYR_RETURN_IF_FALSE(cli->flags & UPYR_CLI_FLAGS_CMD_READY, NULL);
@@ -615,7 +615,7 @@ static void _upyr_cli_handle_char_default(upyr_cli_t *cli, char c)
     }
 }
 
-static void _upyr_cli_term_ansi(upyr_cli_t *cli, size_t n, char code)
+static void _upyr_cli_term_ansi(const upyr_cli_t *cli, size_t n, char code)
 {
     UPYR_RETURN_IF_FALSE(cli);
 
@@ -623,7 +623,7 @@ static void _upyr_cli_term_ansi(upyr_cli_t *cli, size_t n, char code)
     _upyr_cli_internal_puts(cli, buffer);
 }
 
-static void _upyr_cli_term_cursor_back(upyr_cli_t *cli, size_t n)
+static void _upyr_cli_term_cursor_back(const upyr_cli_t *cli, size_t n)
 {
     UPYR_RETURN_IF_FALSE(cli && cli->echo);
 
@@ -635,7 +635,7 @@ static void _upyr_cli_term_cursor_back(upyr_cli_t *cli, size_t n)
     }
 }
 
-static void _upyr_cli_term_cursor_fwd(upyr_cli_t *cli, size_t n)
+static void _upyr_cli_term_cursor_fwd(const upyr_cli_t *cli, size_t n)
 {
     UPYR_RETURN_IF_FALSE(cli && cli->echo);
 
@@ -648,7 +648,7 @@ static void _upyr_cli_term_cursor_fwd(upyr_cli_t *cli, size_t n)
 }
 
 #if UPYR_CLI_HISTORY_ENABLED
-static void _upyr_cli_term_backspace(upyr_cli_t *cli, size_t n)
+static void _upyr_cli_term_backspace(const upyr_cli_t *cli, size_t n)
 {
     UPYR_RETURN_IF_FALSE(cli && cli->echo);
 
