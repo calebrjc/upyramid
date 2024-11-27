@@ -619,7 +619,7 @@ static void _upyr_cli_term_ansi(upyr_cli_t *cli, size_t n, char code)
 {
     UPYR_RETURN_IF_FALSE(cli);
 
-    char buffer[5] = {'\x1b', '[', '0' + (n % 10), code, '\0'};
+    const char buffer[5] = {'\x1b', '[', '0' + (n % 10), code, '\0'};
     _upyr_cli_internal_puts(cli, buffer);
 }
 
@@ -664,7 +664,7 @@ static void _upyr_cli_history_append(upyr_cli_t *cli)
 {
     UPYR_RETURN_IF_FALSE(cli);
 
-    if (cli->buffer_ptr <= 0 || strcmp(cli->buffer, cli->history_buffer) == 0)
+    if (cli->buffer_ptr == 0 || strcmp(cli->buffer, cli->history_buffer) == 0)
     {
         return;
     }
@@ -818,7 +818,7 @@ static const upyr_cli_cmd_spec_t *_upyr_cli_find_cmd(
 
         *o_depth = depth;
 
-        if (depth + 1 >= argc || !found_cmd->subcmds || found_cmd->num_subcmds <= 0)
+        if (depth + 1 >= argc || !found_cmd->subcmds || found_cmd->num_subcmds == 0)
         {
             break;
         }
