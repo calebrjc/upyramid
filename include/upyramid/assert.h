@@ -103,7 +103,7 @@ void upyr_crash(void);
         {                                                                                          \
             /* TODO(Caleb): Create "UPYR_ASSERT tag" */                                            \
             UPYR_LOG_ERROR(0, "Assert failed (%s) - " _format, #_cond, ##__VA_ARGS__);             \
-            upyr_platform_crash();                                                                 \
+            upyr_crash();                                                                          \
         }                                                                                          \
     } while (0)
 
